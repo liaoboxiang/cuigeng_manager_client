@@ -1,0 +1,12 @@
+{
+  "name": "CuiGengManagerClient",
+  "version": "0.0.1",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "1.7.5",
+    "excel": "^0.1.7"
+  }
+}
