@@ -7,7 +7,7 @@ const dialog = electron.dialog;
 const ipc = electron.ipcMain;
 var XLSX = require('xlsx');
 var request = require('request');
-var config = require('./config.json');
+var config = require('../config/config.js');
 
 ipc.on('upload_config', function (event) {
     dialog.showOpenDialog({
@@ -20,7 +20,15 @@ ipc.on('upload_config', function (event) {
             if(err){
                 event.sender.send('upload_finish', err);
             }else{
-                event.sender.send('upload_finish');
+                upload_to_server(data, function(err){
+                    if(err){
+                        console.error("upload error:", err);
+                        event.sender.send('upload_finish', err);
+                    }else {
+                        event.sender.send('upload_finish');
+                    }
+                });
+
             }
         });
     });
@@ -43,14 +51,15 @@ function read_config_file(filePath, cb){
 
 // 上传服务器
 function upload_to_server(data, cb){
-    var ip = config.server_ip;
-    var port = config.port;
+    var ip = config.get('server_ip');
+    var port = config.get('port');
     var opt = {
-        url:ip + ":" + port + "/upload_config",
+        url:"http://" + ip + ":" + port + "/upload_config",
         method:"GET",
-        data:data
+        qs:{data:data}
     }
+    console.log(opt);
     request(opt, function(error, response, body){
-
+        cb(error);
     })
 }

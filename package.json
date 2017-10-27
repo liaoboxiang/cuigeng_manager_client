@@ -1,13 +1,30 @@
 {
   "name": "CuiGengManagerClient",
-  "version": "0.0.1",
+  "version": "0.0.10",
   "main": "app.js",
+  "description": "催更后台的客户端",
+  "author": "box",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "productName": "cuigeng",
+    "dmg": {
+      "window": {
+        "x": 100,
+        "y": 100,
+        "width": 500,
+        "height": 300
+      }
+    }
   },
   "dependencies": {
-    "electron": "1.7.5",
-    "excel": "^0.1.7",
+    "request": "^2.83.0",
     "xlsx": "^0.11.6"
+  },
+  "devDependencies": {
+    "electron": "1.7.5"
   }
 }
