@@ -13,8 +13,14 @@ ipc.on('upload_config', function (event) {
     dialog.showOpenDialog({
         properties: [
             'openFile',
+        ],
+        filters:[
+            { name: 'excel', extensions: ['xlsx'] },
         ]
     },function(res){
+        if(!res){
+            event.sender.send('not_choose_config');
+        }
         var filePath = res[0];
         read_config_file(filePath, function(err, data){
             if(err){
@@ -58,7 +64,6 @@ function upload_to_server(data, cb){
         method:"GET",
         qs:{data:data}
     }
-    console.log(opt);
     request(opt, function(error, response, body){
         cb(error);
     })
