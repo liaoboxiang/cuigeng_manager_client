@@ -1,6 +1,6 @@
 {
   "name": "CuiGengManagerClient",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "main": "app.js",
   "description": "催更后台的客户端",
   "author": "box",

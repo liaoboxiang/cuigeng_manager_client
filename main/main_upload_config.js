@@ -20,6 +20,7 @@ ipc.on('upload_config', function (event) {
     },function(res){
         if(!res){
             event.sender.send('not_choose_config');
+            return;
         }
         var filePath = res[0];
         read_config_file(filePath, function(err, data){
